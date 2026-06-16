@@ -1,0 +1,4 @@
+-r requirements.txt
+databricks-connect
+ipykernel
+pre-commit
