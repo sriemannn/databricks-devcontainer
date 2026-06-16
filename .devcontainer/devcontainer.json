@@ -1,0 +1,36 @@
+{
+  "name": "Data Engineering with Databricks",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "build": {
+    "args": {
+      "LOCAL_USER": "${localEnv:USER}"
+    } // inject your host username
+  },
+  "runArgs": [
+    "--network",
+    "host"
+  ], // localhost inside == localhost outside
+  "forwardPorts": [
+    8020
+  ], // For local debugging
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.debugpy",
+        "ms-toolsai.jupyter",
+        "databricks.databricks",
+        "paiqo.databricks-vscode",
+        "charliermarsh.ruff",
+        "astral-sh.ty",
+        "usernamehw.errorlens"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/opt/venv/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "chmod +x .devcontainer/post_create.sh",
+  "postStartCommand": "./.devcontainer/post_create.sh"
+}
